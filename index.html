@@ -4,17 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Band Manager</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="container">
+        <!-- Auth Screen -->
+        <div class="screen" id="auth-screen">
+            <h1>🎸 Band Manager 🎵</h1>
+            <div class="auth-forms">
+                <div class="login-form">
+                    <h2>Login</h2>
+                    <form id="loginForm">
+                        <input type="email" id="loginEmail" placeholder="Email" required>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+                <div class="register-form">
+                    <h2>Register</h2>
+                    <form id="registerForm">
+                        <input type="text" id="registerUsername" placeholder="Username" required>
+                        <input type="email" id="registerEmail" placeholder="Email" required>
+                        <input type="password" id="registerPassword" placeholder="Password" required>
+                        <button type="submit">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Header (shown on all screens except auth) -->
+        <div id="game-header" class="game-header" style="display: none;">
+            <div class="user-info">
+                <span id="userBalance">💰 0</span>
+                <button id="logoutButton">Logout</button>
+            </div>
+            <div class="inventory-toolbar">
+                <h3>Your Cards:</h3>
+                <div class="inventory-cards"></div>
+            </div>
+        </div>
+
         <!-- Main Menu Screen -->
-        <div class="screen" id="main-menu">
+        <div class="screen" id="main-menu" style="display: none;">
+            <div class="user-info">
+            </div>
             <h1>🎸 Band Manager 🎵</h1>
             <div class="menu-buttons">
                 <button id="buildButton">Build Your Band</button>
-                <button id="battleButton">Start the Show</button>
+                <button id="battleButton">Start a Show</button>
+                <button id="marketplaceButton">Marketplace</button>
             </div>
+        </div>
+
+        <!-- Marketplace Screen -->
+        <div class="screen" id="marketplace-screen" style="display: none;">
+            <h2>Card Marketplace 🎪</h2>
+            <div class="marketplace-stats">
+                <span id="totalListings">Listings: 0</span>
+                <span id="avgPrice">Avg. Price: 0 💰</span>
+            </div>
+            <div class="marketplace-tabs">
+                <button class="tab-button active" data-tab="browse">Browse Market</button>
+                <button class="tab-button" data-tab="my-listings">My Listings</button>
+            </div>
+            <div class="marketplace-content">
+                <div class="tab-content active" id="browse-content">
+                    <!-- Market listings will be inserted here -->
+                </div>
+                <div class="tab-content" id="my-listings-content">
+                    <!-- User's listed cards will be inserted here -->
+                </div>
+            </div>
+            <button id="backToMarket" class="back-button">← Back to Menu</button>
         </div>
 
         <!-- Build Screen -->
@@ -28,8 +89,12 @@
                     <span>🎭 Hype Points</span>
                 </div>
             </div>
-            <div class="character-selection">
-                <!-- Cards will be dynamically inserted here -->
+            <div class="deck-builder">
+                <div class="deck-slots">
+                    <div class="deck-slot" data-slot="0"></div>
+                    <div class="deck-slot" data-slot="1"></div>
+                    <div class="deck-slot" data-slot="2"></div>
+                </div>
             </div>
             <button id="backToBuild" class="back-button">← Back to Menu</button>
         </div>
@@ -46,7 +111,25 @@
                 <button id="backToBattle" class="back-button">← Back to Menu</button>
             </div>
         </div>
+
+        <!-- Card List Modal -->
+        <div id="listCardModal" class="modal">
+            <div class="modal-content">
+                <h3>List Card for Sale</h3>
+                <div class="price-input">
+                    <input type="range" id="priceSlider" min="100" max="2000" step="100" value="1000">
+                    <input type="number" id="priceInput" value="1000">
+                    <span>💰</span>
+                </div>
+                <div class="modal-buttons">
+                    <button id="confirmList">List Card</button>
+                    <button id="cancelList">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <script src="game.js"></script>
+    <script src="/auth.js"></script>
+    <script src="/marketplace.js"></script>
+    <script src="/game.js"></script>
 </body>
 </html>

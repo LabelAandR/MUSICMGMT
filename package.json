@@ -1,0 +1,27 @@
+{
+  "name": "windsurf-project",
+  "version": "1.0.0",
+  "description": "Music band management game with marketplace",
+  "main": "server.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^7.8.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
