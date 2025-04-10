@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Band Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Main Menu Screen -->
+        <div class="screen" id="main-menu">
+            <h1>🎸 Band Manager 🎵</h1>
+            <div class="menu-buttons">
+                <button id="buildButton">Build Your Band</button>
+                <button id="battleButton">Start the Show</button>
+            </div>
+        </div>
+
+        <!-- Build Screen -->
+        <div class="screen" id="build-screen" style="display: none;">
+            <h2>Choose Your Performers</h2>
+            <div class="build-info">
+                <p>Select 3 performers for your show!</p>
+                <div class="resource-info">
+                    <span class="physical">💪 Physical</span>
+                    <span class="concentration">🧠 Concentration</span>
+                    <span>🎭 Hype Points</span>
+                </div>
+            </div>
+            <div class="character-selection">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+            <button id="backToBuild" class="back-button">← Back to Menu</button>
+        </div>
+
+        <!-- Show Screen -->
+        <div class="screen" id="show-screen" style="display: none;">
+            <h2>🎵 The Show 🎵</h2>
+            <div class="battle-arena">
+                <!-- Selected performers will appear here -->
+            </div>
+            <div class="battle-log" id="battleLog"></div>
+            <div class="battle-controls">
+                <button id="startBattle">Start the Show! 🎸</button>
+                <button id="backToBattle" class="back-button">← Back to Menu</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
