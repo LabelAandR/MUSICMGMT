@@ -20,67 +20,74 @@ async function initializeDatabase() {
         // Create initial cards
         const initialCards = [
             {
-                name: 'Soulful Singer',
-                imageFile: '/images/vocals good.jpg',
-                hype: 8,
-                physical: 2,
-                concentration: 3,
-                description: 'A powerful voice that resonates with the audience',
+                name: "Soulful Singer",
+                description: "A legendary vocalist whose soulful performances inspire the entire band.",
+                imageFile: "/images/vocal-legend.jpg",
+                physical: 6,
+                concentration: 8,
+                hype: 7,
+                skill: {
+                    name: "Inspiring Performance",
+                    description: "Doubles the hype value of the next performer",
+                    effect: "next_card_hype_multiplier_2x"
+                },
                 price: 1000
             },
             {
-                name: 'Dark Vocalist',
-                imageFile: '/images/vocals evil.jpg',
-                hype: 7,
-                physical: 1,
-                concentration: 4,
-                description: 'Haunting melodies that captivate listeners',
-                price: 900
-            },
-            {
-                name: 'Bass Groove',
-                imageFile: '/images/bass.jpg',
-                hype: 6,
-                physical: 2,
-                concentration: 2,
-                description: 'Lays down an irresistible rhythm',
-                price: 800
-            },
-            {
-                name: 'Drum Thunder',
-                imageFile: '/images/drums good.jpg',
-                hype: 7,
-                physical: 3,
-                concentration: 2,
-                description: 'Drives the beat with explosive energy',
-                price: 950
-            },
-            {
-                name: 'Guitar Sage',
-                imageFile: '/images/guitar mage.jpg',
+                name: "Guitar Sage",
+                description: "A wise guitarist who channels ancient musical knowledge.",
+                imageFile: "/images/guitar-mage.jpg",
+                physical: 7,
+                concentration: 9,
                 hype: 8,
-                physical: 2,
-                concentration: 3,
-                description: 'Weaves magical melodies through the air',
+                skill: {
+                    name: "Wisdom of the Strings",
+                    description: "Increases all stats by 2 for the next performer",
+                    effect: "next_card_stats_boost_2"
+                },
                 price: 1100
             },
             {
-                name: 'Guitar Warrior',
-                imageFile: '/images/guitar ninja.jpg',
+                name: "Drum Thunder",
+                description: "A powerful drummer who commands the rhythm of storms.",
+                imageFile: "/images/drum-shaman.jpg",
+                physical: 9,
+                concentration: 7,
                 hype: 7,
-                physical: 3,
-                concentration: 2,
-                description: 'Shreds with lightning-fast precision',
-                price: 1000
+                skill: {
+                    name: "Thunder Strike",
+                    description: "Adds your physical stat to your hype for this performance",
+                    effect: "add_physical_to_hype"
+                },
+                price: 900
             },
             {
-                name: 'Soul Weaver',
-                imageFile: '/images/Soulful Evocation.jpg',
-                hype: 10,
-                physical: 3,
-                concentration: 4,
-                description: 'Creates transcendent musical experiences',
-                price: 1500
+                name: "Bass Groove",
+                description: "A funky bassist who keeps the crowd moving.",
+                imageFile: "/images/bass.jpg",
+                physical: 7,
+                concentration: 8,
+                hype: 6,
+                skill: {
+                    name: "Deep Rhythm",
+                    description: "Your next two performers gain +3 hype",
+                    effect: "next_two_cards_hype_boost_3"
+                },
+                price: 800
+            },
+            {
+                name: "Dark Vocalist",
+                description: "A mysterious singer with haunting melodies.",
+                imageFile: "/images/vocal-legend.jpg",
+                physical: 5,
+                concentration: 9,
+                hype: 8,
+                skill: {
+                    name: "Haunting Echo",
+                    description: "Copies the previous performer's hype value",
+                    effect: "copy_previous_hype"
+                },
+                price: 900
             }
         ];
 

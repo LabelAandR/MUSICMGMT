@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Band Manager</title>
+    <title></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Auth Screen -->
         <div class="screen" id="auth-screen">
-            <h1>🎸 Band Manager 🎵</h1>
             <div class="auth-forms">
                 <div class="login-form">
                     <h2>Login</h2>
@@ -32,23 +31,18 @@
             </div>
         </div>
 
-        <!-- Game Header (shown on all screens except auth) -->
+        <!-- Game Header -->
         <div id="game-header" class="game-header" style="display: none;">
-            <div class="user-info">
-                <span id="userBalance">💰 0</span>
-                <button id="logoutButton">Logout</button>
-            </div>
-            <div class="inventory-toolbar">
-                <h3>Your Cards:</h3>
-                <div class="inventory-cards"></div>
+            <div class="header-content">
+                <div class="user-section">
+                    <span id="userBalance"> 0</span>
+                    <button id="logoutButton">Logout</button>
+                </div>
             </div>
         </div>
 
         <!-- Main Menu Screen -->
         <div class="screen" id="main-menu" style="display: none;">
-            <div class="user-info">
-            </div>
-            <h1>🎸 Band Manager 🎵</h1>
             <div class="menu-buttons">
                 <button id="buildButton">Build Your Band</button>
                 <button id="battleButton">Start a Show</button>
@@ -58,10 +52,16 @@
 
         <!-- Marketplace Screen -->
         <div class="screen" id="marketplace-screen" style="display: none;">
-            <h2>Card Marketplace 🎪</h2>
+            <div class="inventory-section">
+                <div class="inventory-scroll">
+                    <div class="inventory-cards"></div>
+                </div>
+                <div class="inventory-tooltip"></div>
+            </div>
+            <h2>Card Marketplace </h2>
             <div class="marketplace-stats">
                 <span id="totalListings">Listings: 0</span>
-                <span id="avgPrice">Avg. Price: 0 💰</span>
+                <span id="avgPrice">Avg. Price: 0 </span>
             </div>
             <div class="marketplace-tabs">
                 <button class="tab-button active" data-tab="browse">Browse Market</button>
@@ -75,18 +75,24 @@
                     <!-- User's listed cards will be inserted here -->
                 </div>
             </div>
-            <button id="backToMarket" class="back-button">← Back to Menu</button>
+            <button id="backToMarket" class="back-button"> Back to Menu</button>
         </div>
 
         <!-- Build Screen -->
         <div class="screen" id="build-screen" style="display: none;">
+            <div class="inventory-section">
+                <div class="inventory-scroll">
+                    <div class="inventory-cards"></div>
+                </div>
+                <div class="inventory-tooltip"></div>
+            </div>
             <h2>Choose Your Performers</h2>
             <div class="build-info">
                 <p>Select 3 performers for your show!</p>
                 <div class="resource-info">
-                    <span class="physical">💪 Physical</span>
-                    <span class="concentration">🧠 Concentration</span>
-                    <span>🎭 Hype Points</span>
+                    <span class="physical"></span>
+                    <span class="concentration"></span>
+                    <span> Hype Points</span>
                 </div>
             </div>
             <div class="deck-builder">
@@ -96,19 +102,19 @@
                     <div class="deck-slot" data-slot="2"></div>
                 </div>
             </div>
-            <button id="backToBuild" class="back-button">← Back to Menu</button>
+            <button id="backToBuild" class="back-button"> Back to Menu</button>
         </div>
 
         <!-- Show Screen -->
         <div class="screen" id="show-screen" style="display: none;">
-            <h2>🎵 The Show 🎵</h2>
+            <h2> The Show </h2>
             <div class="battle-arena">
                 <!-- Selected performers will appear here -->
             </div>
             <div class="battle-log" id="battleLog"></div>
             <div class="battle-controls">
-                <button id="startBattle">Start the Show! 🎸</button>
-                <button id="backToBattle" class="back-button">← Back to Menu</button>
+                <button id="startBattle">Start the Show! </button>
+                <button id="backToBattle" class="back-button"> Back to Menu</button>
             </div>
         </div>
 
@@ -119,7 +125,7 @@
                 <div class="price-input">
                     <input type="range" id="priceSlider" min="100" max="2000" step="100" value="1000">
                     <input type="number" id="priceInput" value="1000">
-                    <span>💰</span>
+                    <span> </span>
                 </div>
                 <div class="modal-buttons">
                     <button id="confirmList">List Card</button>
@@ -129,7 +135,9 @@
         </div>
     </div>
     <script src="/auth.js"></script>
+    <script src="/simple-inventory.js"></script>
     <script src="/marketplace.js"></script>
     <script src="/game.js"></script>
+    <script src="/debug.js"></script>
 </body>
 </html>

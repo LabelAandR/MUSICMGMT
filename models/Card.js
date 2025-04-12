@@ -25,6 +25,20 @@ const cardSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    skill: {
+        name: {
+            type: String,
+            default: null
+        },
+        description: {
+            type: String,
+            default: null
+        },
+        effect: {
+            type: String,
+            default: null
+        }
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'

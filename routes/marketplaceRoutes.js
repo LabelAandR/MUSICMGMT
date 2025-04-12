@@ -112,7 +112,8 @@ router.post('/buy/:listingId', auth, async (req, res) => {
     try {
         const listing = await Listing.findById(req.params.listingId)
             .populate('card')
-            .populate('seller');
+            .populate('seller')
+            .session(session);
 
         if (!listing) {
             await session.abortTransaction();
@@ -137,7 +138,12 @@ router.post('/buy/:listingId', auth, async (req, res) => {
         }
 
         // Update card ownership
-        const card = listing.card;
+        const card = await Card.findById(listing.card._id).session(session);
+        if (!card) {
+            await session.abortTransaction();
+            return res.status(404).json({ message: 'Card not found' });
+        }
+
         card.owner = buyer._id;
         card.forSale = false;
         await card.save({ session });
@@ -146,20 +152,28 @@ router.post('/buy/:listingId', auth, async (req, res) => {
         buyer.currency -= listing.price;
         await buyer.save({ session });
 
-        const seller = listing.seller;
+        const seller = await User.findById(listing.seller._id).session(session);
+        if (!seller) {
+            await session.abortTransaction();
+            return res.status(404).json({ message: 'Seller not found' });
+        }
+
         seller.currency += listing.price;
         await seller.save({ session });
 
         // Remove the listing
         await Listing.findByIdAndDelete(listing._id, { session });
 
-        // Commit the transaction
         await session.commitTransaction();
-
-        res.json({
-            message: 'Purchase successful',
-            card,
-            currency: buyer.currency
+        console.log('Purchase successful:', {
+            cardId: card._id,
+            newOwner: buyer._id,
+            price: listing.price
+        });
+        res.json({ 
+            message: 'Card purchased successfully', 
+            currency: buyer.currency,
+            cardId: card._id
         });
     } catch (error) {
         await session.abortTransaction();

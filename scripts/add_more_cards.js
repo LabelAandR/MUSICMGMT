@@ -9,65 +9,65 @@ const additionalCards = [
         name: "Rock Star",
         description: "A high-energy performer who knows how to work the crowd",
         imageFile: "guitar-mage.jpg",
-        hype: 85,
-        physical: 75,
-        concentration: 60
+        hype: 8,
+        physical: 7,
+        concentration: 6
     },
     {
         name: "Jazz Virtuoso",
         description: "Master of improvisation and smooth melodies",
         imageFile: "brass-king.jpg", // Fixed image
-        hype: 70,
-        physical: 55,
-        concentration: 90
+        hype: 7,
+        physical: 5,
+        concentration: 9
     },
     {
         name: "EDM Producer",
         description: "Electronic music wizard with killer beats",
         imageFile: "dj-master.jpg",
-        hype: 80,
-        physical: 65,
-        concentration: 85
+        hype: 8,
+        physical: 6,
+        concentration: 8
     },
     {
         name: "Classical Pianist",
         description: "Elegant and precise, brings sophistication to any show",
         imageFile: "string-queen.jpg",
-        hype: 65,
-        physical: 70,
-        concentration: 95
+        hype: 6,
+        physical: 7,
+        concentration: 9
     },
     {
         name: "Pop Diva",
         description: "Chart-topping sensation with a powerful voice",
         imageFile: "vocal-legend.jpg",
-        hype: 90,
-        physical: 80,
-        concentration: 75
+        hype: 9,
+        physical: 8,
+        concentration: 7
     },
     {
         name: "Rap Artist",
         description: "Lyrical genius with unmatched flow",
         imageFile: "synth-wizard.jpg",
-        hype: 88,
-        physical: 70,
-        concentration: 85
+        hype: 9,
+        physical: 7,
+        concentration: 8
     },
     {
         name: "Folk Singer",
         description: "Storyteller with a soulful acoustic sound",
         imageFile: "bass.jpg",
-        hype: 60,
-        physical: 50,
-        concentration: 80
+        hype: 6,
+        physical: 5,
+        concentration: 8
     },
     {
         name: "Metal Guitarist",
         description: "Shredding master of heavy riffs",
         imageFile: "drum-shaman.jpg",
-        hype: 85,
-        physical: 85,
-        concentration: 80
+        hype: 8,
+        physical: 8,
+        concentration: 8
     }
 ];
 

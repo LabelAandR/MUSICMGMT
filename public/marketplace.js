@@ -163,50 +163,64 @@ class MarketplaceManager {
         }
 
         listings.forEach(listing => {
-            const card = document.createElement('div');
-            card.className = 'marketplace-card';
-            card.innerHTML = `
-                <div class="card-image">
-                    <img src="/images/${listing.card.imageFile}" alt="${listing.card.name}">
-                </div>
-                <div class="card-details">
-                    <h3>${listing.card.name}</h3>
-                    <p class="card-description">${listing.card.description}</p>
-                    <div class="card-stats">
-                        <span class="physical">${listing.card.physical}</span>
-                        <span class="concentration">${listing.card.concentration}</span>
-                        <span class="hype">${listing.card.hype}</span>
-                    </div>
-                    <div class="listing-info">
-                        <span class="seller">Seller: ${listing.seller.username}</span>
-                        <span class="price">${listing.price}</span>
-                        ${isMyListings ? 
-                            `<button class="cancel-listing" data-listing-id="${listing._id}">Cancel Listing</button>` :
-                            `<button class="buy-button" data-listing-id="${listing._id}">Buy Card</button>`
-                        }
-                    </div>
-                </div>
-            `;
+            const cardContainer = this.createCardElement(listing);
 
-            // Add event listeners based on the tab
-            if (isMyListings) {
-                const cancelButton = card.querySelector('.cancel-listing');
-                if (cancelButton) {
-                    cancelButton.addEventListener('click', () => this.cancelListing(listing._id));
-                }
-            } else {
-                const buyButton = card.querySelector('.buy-button');
-                if (buyButton) {
-                    buyButton.addEventListener('click', () => this.buyCard(listing._id));
-                }
-            }
-
-            container.appendChild(card);
+            container.appendChild(cardContainer);
         });
+    }
+
+    createCardElement(listing) {
+        const cardContainer = document.createElement('div');
+        cardContainer.className = 'card-container';
+
+        const card = document.createElement('div');
+        card.className = 'marketplace-card';
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="card-title">
+                    <span class="title-text">${listing.card.name}</span>
+                </div>
+                <div class="card-stats">
+                    <span class="physical">💪 ${listing.card.physical}</span>
+                    <span class="concentration">🧠 ${listing.card.concentration}</span>
+                    <span class="hype">🎭 ${listing.card.hype}</span>
+                </div>
+            </div>
+            <div class="card-image">
+                <img src="${listing.card.imageFile}" alt="${listing.card.name}">
+            </div>
+            <div class="card-details">
+                ${listing.card.description ? `
+                <div class="flavor-text">${listing.card.description}</div>
+                ` : ''}
+                ${listing.card.skill ? `
+                <div class="card-skill">
+                    <span class="skill-name">${listing.card.skill.name}</span>
+                    <span class="skill-desc">${listing.card.skill.description}</span>
+                </div>
+                ` : ''}
+            </div>
+        `;
+
+        // Add buy button with price
+        const buyButton = document.createElement('button');
+        buyButton.className = 'buy-button';
+        buyButton.dataset.price = listing.price;
+        buyButton.addEventListener('click', () => this.buyCard(listing._id));
+
+        cardContainer.appendChild(card);
+        cardContainer.appendChild(buyButton);
+        return cardContainer;
     }
 
     async buyCard(listingId) {
         try {
+            const listing = this.listings.find(l => l._id === listingId);
+            if (!listing) {
+                alert('Listing not found');
+                return;
+            }
+
             const response = await fetch(`/api/marketplace/buy/${listingId}`, {
                 method: 'POST',
                 headers: authManager.getAuthHeaders()
@@ -214,18 +228,19 @@ class MarketplaceManager {
 
             if (response.ok) {
                 const data = await response.json();
-                // Update user's balance
+                // Update user's currency display
                 document.getElementById('userBalance').textContent = ` ${data.currency}`;
-                // Refresh listings and inventory
-                this.loadListings();
-                showManager.loadUserCards();
+                // Refresh listings and user's inventory
+                await this.loadListings();
+                await window.showManager.loadUserCards();
+                alert(`Successfully purchased ${listing.card.name}!`);
             } else {
                 const error = await response.json();
-                alert(error.message || 'Failed to buy card');
+                alert(error.message || 'Failed to purchase card');
             }
         } catch (error) {
             console.error('Error buying card:', error);
-            alert('Error buying card');
+            alert('Error purchasing card');
         }
     }
 

@@ -10,7 +10,7 @@ const cardRoutes = require('./routes/cardRoutes');
 const marketplaceRoutes = require('./routes/marketplaceRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -31,9 +31,9 @@ app.use('/api/users', userRoutes);
 app.use('/api/cards', cardRoutes);
 app.use('/api/marketplace', marketplaceRoutes);
 
-// Serve static files in production
+// Serve index.html for all other routes
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Error handling middleware
@@ -42,7 +42,6 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Something went wrong!' });
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const server = app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
